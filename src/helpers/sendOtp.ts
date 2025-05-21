@@ -74,7 +74,7 @@ export const verifyOtp = async (email: string, otp: string) => {
     }
 
     // OTP matches, delete it so it can't be reused
-    await redis.del(email);
+    // await redis.del(email);
 
     return { success: true, message: "OTP verified successfully." };
   } catch (error: any) {

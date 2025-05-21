@@ -3,7 +3,7 @@ import { Poppins, Roboto } from 'next/font/google'
 import Provider from './provider';
 
 export const metadata = {
-  title: 'Periskope',
+  title: 'Periskope - Supercharge your WhatsApp',
   description: 'Manage WhatsApp Groups and Chats at scale',
 }
 
