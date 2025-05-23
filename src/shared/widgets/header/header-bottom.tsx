@@ -68,12 +68,12 @@ const HeaderBottom = () => {
                         <div className='flex items-center gap-8' >
                             <div className='flex items-center gap-2' >
                                 <Link
-                                    href="/login"
+                                    href="/"
                                     className='border-2 w-[46px] h-[46px] rounded-full flex items-center justify-center border-[#010f1c1a]'
                                 >
                                     <UserIcon size={27} color='black' />
                                 </Link>
-                                <Link href="/login">
+                                <Link href="/">
                                     <span className='block font-medium' >Hello,</span>
                                     <span className='font-semibold'>Sign In</span>
                                 </Link>
@@ -91,7 +91,7 @@ const HeaderBottom = () => {
                                 </Link>
 
                                 <Link
-                                    href="/cart"
+                                    href="/"
                                     className='relative'
                                 >
                                     <ShoppingCart size={28} color='black' />

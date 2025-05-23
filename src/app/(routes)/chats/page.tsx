@@ -4,13 +4,15 @@ import ChatBox from "@/shared/components/ChatBox";
 import ChatInfo from "@/shared/components/ChatInfo";
 import LeftMenuBar from "@/shared/components/LeftMenuBar";
 import SelectedChat from "@/shared/components/SelectedChat";
+import { useUserStore } from "@/store/useUserStore";
 import Link from "next/link";
 import React from "react";
 import { AiFillThunderbolt, AiOutlineQuestionCircle } from "react-icons/ai";
 import { BsChatDotsFill, BsListTask } from "react-icons/bs";
-import { FaBars } from "react-icons/fa";
+import { HiCursorClick } from "react-icons/hi";
 import { HiOutlineChevronUpDown } from "react-icons/hi2";
 import { IoMdNotificationsOff } from "react-icons/io";
+import { IoLockClosedOutline } from "react-icons/io5";
 import { LuRefreshCcwDot } from "react-icons/lu";
 import { MdInstallDesktop } from "react-icons/md";
 
@@ -19,8 +21,7 @@ export default function Chats({
 }: {
     children: React.ReactNode;
 }) {
-    const [sidebarOpen, setSidebarOpen] = React.useState(true);
-    const [detailsOpen, setDetailsOpen] = React.useState(true);
+    const user = useUserStore((state) => state.user)
 
     return (
         <div className="h-screen flex flex-col bg-background overflow-hidden">
@@ -124,15 +125,36 @@ export default function Chats({
                     <ChatBox />
                 </div>
 
-                {/* Selected Chat */}
-                <div className="h-full w-full self-start">
-                    <SelectedChat />
-                </div>
+                {user == null ? (
+                    <div className="w-full h-full flex items-center justify-center bg-[#F9FAFB]">
+                        <div className="flex flex-col items-center gap-1">
+                            <HiCursorClick size={18} className="text-gray-400" />
+                            <span className="text-gray-400 text-xs font-normal">Select a chat to view</span>
+                            <span className="text-gray-400 text-xs font-medium hover:text-[#15803D] underline transition-all duration-200 mt-1 cursor-pointer">Can't see all data? Click to refresh</span>
+                        </div>
 
-                {/* chat info */}
-                <div className="h-full w-full self-start">
-                    <ChatInfo />
-                </div>
+                        <div className="flex flex-row items-center gap-1 absolute bottom-6">
+                            <IoLockClosedOutline size={14} className="text-gray-400" />
+                            <span className="text-gray-400 text-xs font-normal">Secure viewer</span>
+                        </div>
+
+                    </div>)
+                    :
+                    (
+                        <>
+                            {/* Selected Chat */}
+                            <div className="h-full w-full self-start">
+                                <SelectedChat />
+                            </div>
+
+                            {/* chat info */}
+                            <div className="h-full w-full self-start">
+                                <ChatInfo user={user} />
+                            </div>
+                        </>
+                    )
+                }
+
             </div>
         </div>
     );

@@ -13,6 +13,7 @@ export async function POST(req: Request) {
 
   try {
     const result = await sendOtpEmail(email);
+    console.log("result", result);
     return NextResponse.json(result);
   } catch (error) {
     console.error("API Error:", error);
